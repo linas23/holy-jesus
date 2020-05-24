@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="one d-flex align-end justify-center">
-      <p class="headline white--text text-center mb-12">
+      <p
+        class="headline white--text text-center mb-12"
+        data-aos="fade-up"
+        data-aos-offset="111"
+        data-aos-delay="50"
+      >
         My kingdom is not of this world.
         <br />If it were, my servants would fight to prevent my arrest by the Jews.
         <br />But now my kingdom is from another place.
@@ -10,8 +15,10 @@
     <v-card height="60vh">
       <v-row>
         <v-col cols="12" md="6" class="pa-12 secondary">
-          <div class="display-1">Read the holy bible</div>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, recusandae necessitatibus? Sit reiciendis nam iste deserunt incidunt odio maxime veritatis dolorem optio omnis?</p>
+          <div data-aos="slide-right" data-aos-offset="200" data-aos-delay="50">
+            <div class="display-1">Read the holy bible</div>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, recusandae necessitatibus? Sit reiciendis nam iste deserunt incidunt odio maxime veritatis dolorem optio omnis?</p>
+          </div>
         </v-col>
         <v-col cols="12" md="6" class="two"></v-col>
       </v-row>
@@ -20,6 +27,9 @@
     <div class="four d-flex justify-center align-center">
       <div
         class="title white--text"
+        data-aos="zoom-in"
+        data-aos-delay="111"
+        data-aos-easing="ease-out-sine"
       >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam soluta ad unde asperiores est officia, corporis eum maiores consequatur sint, eaque, nobis nihil?</div>
     </div>
   </div>
@@ -27,9 +37,15 @@
 
 <script>
 import facts from "~/components/factBox";
+import AOS from "aos";
+import "aos/dist/aos.css";
+// ..
 export default {
   components: {
     facts
+  },
+  mounted() {
+    AOS.init();
   }
 };
 </script>

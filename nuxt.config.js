@@ -20,7 +20,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#f00' },
   /*
   ** Global CSS
   */
@@ -30,7 +30,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/credential.js'
+    '~/plugins/credential.js',
+    '~/plugins/circle.js'
   ],
   /*
   ** Nuxt.js dev-modules

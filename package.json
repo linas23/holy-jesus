@@ -11,9 +11,11 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/dotenv": "^1.4.0"
+    "@nuxtjs/dotenv": "^1.4.0",
+    "aos": "^3.0.0-beta.6",
+    "nuxt": "^2.0.0",
+    "scrollreveal": "^4.0.6"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"

@@ -3,10 +3,16 @@
     <div class="text-center display-1 white--text pt-12">Facts about Christianity</div>
     <v-row class="pa-12">
       <v-col cols="12" md="6">
-        <ul>
-          <li>Christianity is the world’s largest religion</li>
-          <li>There are three main branches of Christianity which are Catholicism, Orthodox, and Protestantism.</li>
-          <li>Christianity has 10 commandments</li>
+        <ul data-aos="slide-right">
+          <li
+            data-aos="slide-right"
+            data-aos-delay="2222"
+          >Christianity is the world’s largest religion</li>
+          <li
+            data-aos="slide-right"
+            data-aos-delay="2222"
+          >There are three main branches of Christianity which are Catholicism, Orthodox, and Protestantism.</li>
+          <li data-aos="slide-right" data-aos-delay="2222">Christianity has 10 commandments</li>
           <li>Easter is one of the main holidays</li>
           <li>There is no original Bible dating back to Jesus</li>
           <li>Approximately 100 million bibles are sold every year</li>
@@ -18,7 +24,7 @@
         </ul>
       </v-col>
       <v-col cols="12" md="6">
-        <ul style="text-align:right">
+        <ul style="text-align:right" data-aos="slide-left">
           <li>Most Christians are praying daily but it’s not mandatory</li>
           <li>You get baptized to get rid of your original sin</li>
           <li>God created the world in seven days</li>
@@ -37,7 +43,13 @@
 </template>
 
 <script>
-export default {};
+import AOS from "aos";
+import "aos/dist/aos.css";
+export default {
+  mounted() {
+    AOS.init();
+  }
+};
 </script>
 
 <style lang="scss">

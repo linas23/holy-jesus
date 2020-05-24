@@ -1,29 +1,40 @@
 <template>
   <v-container>
-    <div class="display-1 info--text">
-      Chapters of
-      <span class="secondary--text">{{chapters[0].reference}}</span>
+    <div v-if="chapters">
+      <div class="display-1 info--text">
+        Chapters of
+        <span class="secondary--text">{{chapters[0].reference}}</span>
+      </div>
+      <v-row justify="center">
+        <v-col cols="6" sm="3" v-for="(chapter,index) in chapters" :key="index">
+          <v-card
+            hover
+            height="111"
+            class="justify-center d-flex align-center card"
+            @click="getVerses(chapter)"
+            data-aos="zoom-in"
+          >
+            <v-card-title class="info--text">{{chapter.reference}}</v-card-title>
+          </v-card>
+        </v-col>
+      </v-row>
     </div>
-    <v-row justify="center">
-      <v-col cols="6" sm="3" v-for="(chapter,index) in chapters" :key="index">
-        <v-card
-          hover
-          height="111"
-          class="justify-center d-flex align-center card"
-          @click="getVerses(chapter)"
-        >
-          <v-card-title class="info--text">{{chapter.reference}}</v-card-title>
-        </v-card>
-      </v-col>
-    </v-row>
+    <div v-else>
+      <progress-circle></progress-circle>
+    </div>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import AOS from "aos";
+import "aos/dist/aos.css";
 export default {
   computed: {
     ...mapGetters(["chapters"])
+  },
+  mounted() {
+    AOS.init();
   },
   methods: {
     async getVerses(chapter) {
