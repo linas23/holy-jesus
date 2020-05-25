@@ -41,7 +41,11 @@ export default {
     AOS.init();
   },
   created() {
-    this.$store.dispatch("getBibleBooks", this.$route.params.bibleId);
+    this.$store
+      .dispatch("getBibleBooks", this.$route.params.bibleId)
+      .catch(e => {
+        throw e;
+      });
   },
   methods: {
     async getChapters(book) {

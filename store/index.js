@@ -25,47 +25,56 @@ export const mutations = {
     },
     SET_VERSE(state, verse) {
         state.verse = verse;
-    },
-    CLEAR(state, name) {
-        console.log(name)
-        state[name] = [];
-        console.log(state.name)
     }
 
 }
 export const actions = {
     async getBibleList({ commit }) {
-        // commit('CLEAR', 'bibles')
-
-        let { data } = await this.$axios.$get('/bibles?language=eng')
-        let bibles = data.map(el => {
-            let { id, name, description } = el;
-            return { id, name, description }
-        })
-        commit('SET_BIBLES', bibles)
+        try {
+            let { data } = await this.$axios.$get('/bibles?language=eng')
+            let bibles = data.map(el => {
+                let { id, name, description } = el;
+                return { id, name, description }
+            })
+            commit('SET_BIBLES', bibles)
+        } catch (e) {
+            throw e
+        }
     },
     async getBibleBooks({ commit }, id) {
-        // commit('CLEAR', 'bibleBooks')
-        let { data } = await this.$axios.$get(`/bibles/${id}/books`)
-        commit('SET_BIBLE_BOOKS', data)
+        try {
+            let { data } = await this.$axios.$get(`/bibles/${id}/books`)
+            commit('SET_BIBLE_BOOKS', data)
+        } catch (e) {
+            throw e
+        }
     },
 
     async getChaptersForABible({ commit }, { bibleId, bookId }) {
-        // commit('CLEAR', 'chapters')
-        let { data } = await this.$axios.$get(`/bibles/${bibleId}/books/${bookId}/chapters`)
-        commit('SET_CHAPTERS', data);
-        return true;
+        try {
+            let { data } = await this.$axios.$get(`/bibles/${bibleId}/books/${bookId}/chapters`)
+            commit('SET_CHAPTERS', data);
+            return true;
+        } catch (e) {
+            throw e
+        }
     },
 
     async getVersesForAChapter({ commit }, { chapterId, bibleId }) {
-        // commit('CLEAR', 'verses')
-        let { data } = await this.$axios.$get(`/bibles/${bibleId}/chapters/${chapterId}/verses`)
-        commit('SET_VERSES', data);
+        try {
+            let { data } = await this.$axios.$get(`/bibles/${bibleId}/chapters/${chapterId}/verses`)
+            commit('SET_VERSES', data);
+        } catch (e) {
+            throw e
+        }
 
     },
     async getVerse({ commit }, { verseId, bibleId }) {
-        // commit('CLEAR', 'verse')
-        let { data } = await this.$axios.$get(`/bibles/${bibleId}/verses/${verseId}`)
-        return data.content
+        try {
+            let { data } = await this.$axios.$get(`/bibles/${bibleId}/verses/${verseId}`)
+            return data.content
+        } catch (e) {
+            throw e
+        }
     }
 }

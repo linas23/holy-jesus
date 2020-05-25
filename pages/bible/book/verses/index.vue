@@ -37,12 +37,33 @@ export default {
         verseId: el.id,
         bibleId: el.bibleId
       });
-      verses.push(content);
+      console.log(content);
+      let doc = new DOMParser().parseFromString(content, "text/html").body
+        .childNodes[0];
+      let node = doc.querySelector("span .v");
+
+      if (node) {
+        let index = node.dataset.number;
+        let newContent = {
+          id: index,
+          content: doc.innerHTML
+        };
+        // console.log(newContent);
+        verses.push(newContent);
+      } else {
+        verses.push(content);
+      }
+      verses = verses.sort((a, b) => a.id - b.id);
     });
     return {
       verses
     };
   }
+  /* watch: {
+    verses: function(value) {
+      return value.sort((a, b) => a.id - b.id);
+    }
+  } */
 };
 </script>
 

@@ -30,7 +30,9 @@
         data-aos="zoom-in"
         data-aos-delay="111"
         data-aos-easing="ease-out-sine"
-      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam soluta ad unde asperiores est officia, corporis eum maiores consequatur sint, eaque, nobis nihil?</div>
+      >
+        <v-btn to="/bible" x-large class="warning">Go to Bible</v-btn>
+      </div>
     </div>
   </div>
 </template>

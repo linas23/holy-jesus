@@ -34,7 +34,9 @@ export default {
     AOS.init();
   },
   created() {
-    this.$store.dispatch("getBibleList");
+    this.$store.dispatch("getBibleList").catch(e => {
+      this.$router.push("/error");
+    });
   }
 };
 </script>

@@ -5,37 +5,23 @@
       <v-col cols="12" md="6">
         <ul data-aos="slide-right">
           <li
+            v-for="(text,index) in leftFacts"
+            :key="index"
+            v-html="text"
             data-aos="slide-right"
-            data-aos-delay="2222"
-          >Christianity is the world’s largest religion</li>
-          <li
-            data-aos="slide-right"
-            data-aos-delay="2222"
-          >There are three main branches of Christianity which are Catholicism, Orthodox, and Protestantism.</li>
-          <li data-aos="slide-right" data-aos-delay="2222">Christianity has 10 commandments</li>
-          <li>Easter is one of the main holidays</li>
-          <li>There is no original Bible dating back to Jesus</li>
-          <li>Approximately 100 million bibles are sold every year</li>
-          <li>Jerusalem is the holiest city within Christian faith</li>
-          <li>Christianity teaches about heaven and hell</li>
-          <li>More than 70 million people have been killed for their Christian faith</li>
-          <li>The Church murdered and persecuted godless and non-christian people during the holy inquisition</li>
-          <li>There are 6 eternal sins which will not be forgiven by God. These eternal sins are Despair, Presumption, Envying the goodness of another, obstinacy in sin, Final impenitence, impugning the known truth</li>
+            data-aos-delay="1111"
+          ></li>
         </ul>
       </v-col>
       <v-col cols="12" md="6">
         <ul style="text-align:right" data-aos="slide-left">
-          <li>Most Christians are praying daily but it’s not mandatory</li>
-          <li>You get baptized to get rid of your original sin</li>
-          <li>God created the world in seven days</li>
-          <li>Christians believe in one god, it’s a monotheistic religion</li>
-          <li>Mary was the mother of Jesus</li>
-          <li>Monks and Nuns are devoted followers of Christianity</li>
-          <li>The Pope is the leader of the Catholic Church</li>
-          <li>About 71 percent of Americans identify as Christian</li>
-          <li>Exorcism is still performed by priests</li>
-          <li>The Crusades were a series of wars against the Muslims in the 11th century until the 13th century</li>
-          <li>Christianity was spread worldwide during the colonial period, sometimes by force</li>
+          <li
+            v-for="(text,index) in rightFacts"
+            :key="index"
+            v-html="text"
+            data-aos="slide-left"
+            data-aos-delay="1111"
+          ></li>
         </ul>
       </v-col>
     </v-row>
@@ -46,6 +32,36 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 export default {
+  data() {
+    return {
+      leftFacts: [
+        "Christianity is the world’s largest religion",
+        "There are three main branches of Christianity which are Catholicism, Orthodox, and Protestantism.",
+        "Christianity has 10 commandments",
+        "Easter is one of the main holidays</Christianity>",
+        "There is no original Bible dating back to Jesus",
+        "Approximately 100 million bibles are sold every year",
+        "Jerusalem is the holiest city within Christian faith",
+        "Christianity teaches about heaven and hell",
+        "More than 70 million people have been killed for their Christian faith",
+        "The Church murdered and persecuted godless and non-christian people during the holy inquisition",
+        "There are 6 eternal sins which will not be forgiven by God. These eternal sins are Despair, Presumption, Envying the goodness of another, obstinacy in sin, Final impenitence, impugning the known truth"
+      ],
+      rightFacts: [
+        "Most Christians are praying daily but it’s not mandatory",
+        " You get baptized to get rid of your original sin",
+        " God created the world in seven days",
+        " Christians believe in one god, it’s a monotheistic religion",
+        " Mary was the mother of Jesus",
+        " Monks and Nuns are devoted followers of Christianity",
+        " The Pope is the leader of the Catholic Church",
+        " About 71 percent of Americans identify as Christian",
+        " Exorcism is still performed by priests",
+        " The Crusades were a series of wars against the Muslims in the 11th century until the 13th century",
+        " Christianity was spread worldwide during the colonial period, sometimes by force"
+      ]
+    };
+  },
   mounted() {
     AOS.init();
   }
