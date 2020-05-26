@@ -3,12 +3,14 @@ export const state = () => ({
     bibleBooks: [],
     chapters: [],
     verses: [],
+    verse: {}
 })
 export const getters = {
     bibles: state => state.bibles,
     bibleBooks: state => state.bibleBooks,
     chapters: state => state.chapters,
     verses: state => state.verses,
+    verse: state => state.verse
 }
 export const mutations = {
     SET_BIBLES(state, bibles) {
@@ -72,7 +74,7 @@ export const actions = {
     async getVerse({ commit }, { verseId, bibleId }) {
         try {
             let { data } = await this.$axios.$get(`/bibles/${bibleId}/verses/${verseId}`)
-            return data.content
+            commit('SET_VERSE', data)
         } catch (e) {
             throw e
         }

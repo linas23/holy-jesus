@@ -1,71 +1,78 @@
 <template>
-  <v-container>
-    <div class="headline">verses</div>
-    <v-card class="my-5" v-for="(verse,index) in verses" :key="index">
-      <v-card-text v-html="verse"></v-card-text>
-      <!-- {{verse}} -->
-    </v-card>
-  </v-container>
+  <v-card height="85vh" flat class="d-flex justify-center align-center">
+    <v-container>
+      <v-card min-height="150" elevation="15">
+        <div v-if="!loading">
+          <v-card-title class="headline font-weight-black warning--text">{{verse.reference}}</v-card-title>
+          <v-card-text class="secondary--text text--darken-3 title" v-html="verse.content"></v-card-text>
+        </div>
+        <div v-else class="text-center pt-12">
+          <progressCircle></progressCircle>
+        </div>
+      </v-card>
+      <div class="d-flex justify-space-between mt-5">
+        <v-btn text v-if="verseNumber >= verse.previous.number" @click="getPrevious">
+          <v-icon left>mdi-arrow-left-bold</v-icon>Prev
+        </v-btn>
+        <v-btn text @click="getNext" v-if="verse.next">
+          Next
+          <v-icon right>mdi-arrow-right-bold</v-icon>
+        </v-btn>
+      </div>
+    </v-container>
+  </v-card>
 </template>
 
 <script>
 export default {
-  /* computed: {
-    sortedVerses: function() {
-      return this.verses[0];
-      let verseArray = this.verses.sort((a, b) => {
-        return (
-          a
-            .split("</span>")[0]
-            .split(" ")
-            .pop() -
-          b
-            .split("</span>")[0]
-            .split(" ")
-            .pop()
-        );
-      });
-      return verseArray;
-      //   console.log(this.verses);
-    }
-  }, */
-  asyncData({ store }) {
-    let verses = [];
-    let verseIds = store.getters.verses;
-    verseIds.forEach(async el => {
-      let content = await store.dispatch("getVerse", {
-        verseId: el.id,
-        bibleId: el.bibleId
-      });
-      console.log(content);
-      let doc = new DOMParser().parseFromString(content, "text/html").body
-        .childNodes[0];
-      let node = doc.querySelector("span .v");
-
-      if (node) {
-        let index = node.dataset.number;
-        let newContent = {
-          id: index,
-          content: doc.innerHTML
-        };
-        // console.log(newContent);
-        verses.push(newContent);
-      } else {
-        verses.push(content);
-      }
-      verses = verses.sort((a, b) => a.id - b.id);
-    });
+  head() {
     return {
-      verses
+      title: "Verse - " + this.verse.reference
     };
-  }
-  /* watch: {
-    verses: function(value) {
-      return value.sort((a, b) => a.id - b.id);
+  },
+  data() {
+    return {
+      verseNumber: 0,
+      loading: false
+    };
+  },
+  computed: {
+    verse() {
+      return this.$store.getters.verse;
     }
-  } */
+  },
+  async asyncData({ store }) {
+    let verses = store.getters.verses;
+    let el = verses[0];
+    let verseId = el.id;
+    let bibleId = el.bibleId;
+    await store.dispatch("getVerse", { verseId, bibleId });
+  },
+  methods: {
+    async getPrevious() {
+      this.verseNumber--;
+      this.loading = true;
+      let el = this.verse;
+      let verseId = el.previous.id;
+      let bibleId = el.bibleId;
+      await this.$store.dispatch("getVerse", { verseId, bibleId });
+      this.loading = false;
+    },
+    async getNext() {
+      this.verseNumber++;
+      this.loading = true;
+      let el = this.verse;
+      let verseId = el.next.id;
+      let bibleId = el.bibleId;
+      await this.$store.dispatch("getVerse", { verseId, bibleId });
+      this.loading = false;
+    }
+  }
 };
 </script>
 
 <style>
+span {
+  display: none;
+}
 </style>

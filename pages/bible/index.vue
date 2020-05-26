@@ -27,16 +27,19 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default {
+  head() {
+    return {
+      title: "Bibles"
+    };
+  },
   computed: {
     ...mapGetters(["bibles"])
   },
   mounted() {
     AOS.init();
   },
-  created() {
-    this.$store.dispatch("getBibleList").catch(e => {
-      this.$router.push("/error");
-    });
+  async asyncData({ store }) {
+    await store.dispatch("getBibleList");
   }
 };
 </script>

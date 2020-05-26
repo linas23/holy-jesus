@@ -5,7 +5,7 @@
       <br />
       <span class="secondary--text display-1">{{bookName.name}}</span>
     </div>
-    <v-row v-if="bibleBooks">
+    <v-row>
       <v-col cols="12" md="6" v-for="(bible,index) in bibleBooks" :key="index">
         <v-card
           hover
@@ -20,9 +20,6 @@
         </v-card>
       </v-col>
     </v-row>
-    <div v-else>
-      <progress-circle></progress-circle>
-    </div>
   </v-container>
 </template>
 
@@ -31,6 +28,11 @@ import { mapGetters, actions } from "vuex";
 import AOS from "aos";
 import "aos/dist/aos.css";
 export default {
+  head() {
+    return {
+      title: "Books"
+    };
+  },
   computed: {
     ...mapGetters(["bibleBooks", "bibles"]),
     bookName: function() {
@@ -40,12 +42,8 @@ export default {
   mounted() {
     AOS.init();
   },
-  created() {
-    this.$store
-      .dispatch("getBibleBooks", this.$route.params.bibleId)
-      .catch(e => {
-        throw e;
-      });
+  async asyncData({ store, route }) {
+    await store.dispatch("getBibleBooks", route.params.bibleId);
   },
   methods: {
     async getChapters(book) {

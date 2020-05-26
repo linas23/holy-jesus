@@ -1,4 +1,4 @@
 import Vue from 'vue'
 import progressCircle from '~/components/progressCircle'
 
-Vue.use(progressCircle)
+Vue.component('progressCircle', progressCircle)

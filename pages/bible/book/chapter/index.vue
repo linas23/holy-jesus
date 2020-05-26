@@ -1,10 +1,7 @@
 <template>
   <v-container>
     <div v-if="chapters">
-      <div class="display-1 info--text">
-        Chapters of
-        <span class="secondary--text">{{chapters[0].reference}}</span>
-      </div>
+      <div class="display-1 info--text">Chapters</div>
       <v-row justify="center">
         <v-col cols="6" sm="3" v-for="(chapter,index) in chapters" :key="index">
           <v-card
@@ -30,6 +27,11 @@ import { mapGetters } from "vuex";
 import AOS from "aos";
 import "aos/dist/aos.css";
 export default {
+  head() {
+    return {
+      title: this.chapters[0].reference
+    };
+  },
   computed: {
     ...mapGetters(["chapters"])
   },
